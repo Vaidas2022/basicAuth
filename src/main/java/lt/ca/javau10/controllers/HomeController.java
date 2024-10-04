@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lt.ca.javau10.services.UserService;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/home")
 public class HomeController {
 
 	@Autowired

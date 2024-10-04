@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lt.ca.javau10.entities.UserEntity;
@@ -37,10 +38,25 @@ public class UsersController {
 		return userService.getAll();
 	}
 	
+//	@PostMapping("/add")
+//	public UserEntity addUser(@RequestBody UserEntity user) {
+//		logger.info("We've got POST request, to add new user");
+//		return userService.createUser(user);
+//	}
+	
 	@PostMapping("/add")
-	public UserEntity addUser(@RequestBody UserEntity user) {
-		return userService.createUser(user);
+	public UserEntity createUser(
+			@RequestParam String username, 
+			@RequestParam String password,
+			@RequestParam Set<String> roles
+			) {
+		logger.info("We've got POST request, to add new user");
+		
+		
+		return userService.createUser(username,password, roles);
 	}
+	
+	
 	
 	@GetMapping("/dummy")
 	public UserEntity getDummy() {

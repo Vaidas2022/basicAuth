@@ -3,6 +3,8 @@ package lt.ca.javau10.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -25,6 +27,7 @@ public class UserEntity {
 	@Column(nullable=false, unique = true)
 	private String userName;
 
+	@JsonIgnore
 	@Column(nullable=false)
 	private String password;
 	

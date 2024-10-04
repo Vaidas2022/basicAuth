@@ -33,9 +33,7 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http
 	        .authorizeHttpRequests(auth -> auth
-//	            .requestMatchers("/admin/**").permitAll()           //.hasRole("ADMIN")
-//	            .requestMatchers("/public").permitAll()
-//	            .requestMatchers("/mypass").permitAll()
+	            .requestMatchers("/admin/*").hasRole("ADMIN")
 	            .anyRequest().permitAll()
 	        )
 	        .formLogin(form -> form	           
@@ -43,7 +41,7 @@ public class SecurityConfig {
 	        )
 	        .logout(logout -> logout
 	            .permitAll() // Allow all to access the logout endpoint
-	        );
+	        ).csrf(csrf -> csrf.disable());
 
 	    return http.build();
 	}
