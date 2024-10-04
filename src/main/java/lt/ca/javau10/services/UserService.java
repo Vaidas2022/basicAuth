@@ -31,6 +31,11 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
+	public UserEntity createUser(UserEntity user) {
+		user.setPassword( passwordEncoder.encode(user.getPassword()) );
+		return userRepository.save(user);
+	}
+	
 	public Optional<UserEntity> getUserByUsername(String username){
 		return userRepository.findByUserName(username);
 	}

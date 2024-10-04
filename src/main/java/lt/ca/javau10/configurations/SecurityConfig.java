@@ -33,10 +33,10 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers("/admin").hasRole("ADMIN")
-	            .requestMatchers("/public").permitAll()
-	            .requestMatchers("/mypass").permitAll()
-	            .anyRequest().authenticated()
+//	            .requestMatchers("/admin/**").permitAll()           //.hasRole("ADMIN")
+//	            .requestMatchers("/public").permitAll()
+//	            .requestMatchers("/mypass").permitAll()
+	            .anyRequest().permitAll()
 	        )
 	        .formLogin(form -> form	           
 	            .permitAll() // Permit all access to the login page
@@ -48,31 +48,9 @@ public class SecurityConfig {
 	    return http.build();
 	}
 	
-    //@Bean --
-    UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {    	
-
-    	UserDetails user = User
-    			.withUsername("user")
-    			.password(passwordEncoder.encode("pass"))
-    			.roles("USER")
-    			.build();
-    	
-    	UserDetails admin = User
-    			.withUsername("admin")
-    			.password(passwordEncoder.encode("admin"))
-    			.roles("ADMIN")
-    			.build();
-    	
-    	
-    	return new InMemoryUserDetailsManager(user,admin);
-    	
-    }
-    
     @Bean
     UserDetailsService userDetailsService() {
-    	
-    	
-    	
+
         return username -> userService.getUserByUsername(username)
             .map(user -> User.withUsername(user.getUserName())
                     .password(user.getPassword())
